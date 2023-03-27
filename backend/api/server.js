@@ -1,0 +1,56 @@
+import express from 'express';     ///imp
+import cors from 'cors';
+import * as dotenv from 'dotenv';
+import { Configuration, OpenAIApi } from 'openai';    ///imd
+
+
+dotenv.config();
+
+
+const app = express();
+const PORT = process.env.PORT || 4000;
+
+
+const configuration = new Configuration({
+    apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
+
+
+app.use(cors());
+app.use(express.json());
+
+
+app.get('/', async(req, res)=> {    ///khai báo tuyến đường route localhost:4000/
+    res.status(200).send({
+        message: "This is ChatGPT AI App"
+    });
+});
+
+
+app.post('/', async(req, res)=>{
+    try {
+        const response = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: req.body.input,    ///get thuộc tính input từ api.js
+            temperature: 0,
+            max_tokens: 4000,
+            top_p: 1,
+            frequency_penalty: 0.5,
+            presence_penalty: 0
+        });
+
+        console.log("PASSED: ", req.body.input);
+
+        res.status(200).send({
+            bot: response.data.choices[0].text    ////trả về đối tượng bot
+        });
+    } catch(err) {
+        console.log("FAILED: ", req.body.input);
+        console.error(err);
+        res.status(500).send(err);
+    }
+});
+
+
+app.listen(PORT, ()=>console.log(`Server is running on port ${PORT}`));

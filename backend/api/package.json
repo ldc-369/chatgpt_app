@@ -1,0 +1,21 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "comment": "chỉ định gói là module",
+  "type": "module",
+  "scripts": {
+    "comment": "tự động lắng nghe các thay đổi của tệp",
+    "server": "nodemon server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22",
+    "openai": "^3.2.1"
+  }
+}
