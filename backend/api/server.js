@@ -1,7 +1,7 @@
-import express from 'express';     ///imp
+import express from 'express';    
 import cors from 'cors';
 import * as dotenv from 'dotenv';
-import { Configuration, OpenAIApi } from 'openai';    ///imd
+import { Configuration, OpenAIApi } from 'openai';   
 
 
 dotenv.config();
@@ -21,7 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 
-app.get('/', async(req, res)=> {    ///khai báo tuyến đường route localhost:4000/
+app.get('/', async(req, res)=> {    
     res.status(200).send({
         message: "This is ChatGPT AI App"
     });
@@ -32,7 +32,7 @@ app.post('/', async(req, res)=>{
     try {
         const response = await openai.createCompletion({
             model: "text-davinci-003",
-            prompt: req.body.input,    ///get thuộc tính input từ api.js
+            prompt: req.body.input,   
             temperature: 0,
             max_tokens: 4000,
             top_p: 1,
@@ -43,7 +43,7 @@ app.post('/', async(req, res)=>{
         console.log("PASSED: ", req.body.input);
 
         res.status(200).send({
-            bot: response.data.choices[0].text    ////trả về đối tượng bot
+            bot: response.data.choices[0].text   
         });
     } catch(err) {
         console.log("FAILED: ", req.body.input);

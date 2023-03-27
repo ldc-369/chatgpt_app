@@ -9,9 +9,9 @@ const params = {
 }
 
 
-export const fetchDataBotResponse = async(input)=>{ ////////
+export const fetchDataBotResponse = async(input)=>{ 
     try {
-        const {data} = await axios.post(BASE_URL, {input}, {params});    ///input: input; {input, params}
+        const {data} = await axios.post(BASE_URL, {input}, {params});   
         return data;
     } catch(err) {
         console.log(err);
